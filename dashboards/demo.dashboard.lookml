@@ -1,4 +1,4 @@
-- dashboard: healthcare_demo_dashboard
+- dashboard: healthcare_demo_1_dashboard
   title: Healthcare Demo Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -7,7 +7,7 @@
   elements:
   - title: Most Common Patient Conditions
     name: Most Common Patient Conditions
-    model: healthcare_demo
+    model: healthcare_demo_1_1
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, fct_patient_conditions.count]
@@ -96,7 +96,7 @@
     height: 8
   - title: Conditions with Youngest Onset Age
     name: Conditions with Youngest Onset Age
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, average_of_age_onset]
@@ -198,7 +198,7 @@
     height: 7
   - title: Conditions with Oldest Onset Age
     name: Conditions with Oldest Onset Age
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, average_of_age_onset]
@@ -301,7 +301,7 @@
     height: 7
   - title: Top Ten Hospitals With Highest Claim Value
     name: Top Ten Hospitals With Highest Claim Value
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     type: looker_column
     fields: [dim_organizations.organization_name, fct_claims.total_claims_value]
@@ -387,7 +387,7 @@
     height: 8
   - title: New Tile
     name: New Tile
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [dim_patients.count, fct_hospital_events.encounter_started_year]
@@ -424,7 +424,7 @@
     height: 4
   - title: New Tile
     name: New Tile (2)
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.mortality_rate, fct_hospital_events.encounter_started_year]
@@ -463,7 +463,7 @@
     height: 4
   - title: Top 10 Least Successful Procedures
     name: Top 10 Least Successful Procedures
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_column
     fields: [fct_hospital_events.procedure_code, fct_hospital_events.count_of_procedures,
@@ -553,7 +553,7 @@
     height: 9
   - title: Gender Distribution of Patients
     name: Gender Distribution of Patients
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_pie
     fields: [dim_patients.patient_gender, dim_patients.count]
@@ -611,7 +611,7 @@
     height: 8
   - title: Age Distribution of Patients
     name: Age Distribution of Patients
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_pie
     fields: [dim_patients.age_range_tier, dim_patients.count]
@@ -672,7 +672,7 @@
     height: 8
   - title: Encounter Rates by Hospital
     name: Encounter Rates by Hospital
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_google_map
     fields: [dim_organizations.organization_name, dim_organizations.organization_postal_code,
@@ -763,7 +763,7 @@
     height: 12
   - title: Avg Claim Cost per Patient
     name: Avg Claim Cost per Patient
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     type: single_value
     fields: [fct_claims.total_claims_value, dim_patients.count, fct_claims.billable_period_started_year]
@@ -832,7 +832,7 @@
     height: 4
   - title: Average Length of Stay (Days)
     name: Average Length of Stay (Days)
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.average_length_of_stay, fct_hospital_events.count_of_encounters,
@@ -957,7 +957,7 @@
     height: 4
   - title: New Tile
     name: New Tile (3)
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.count_of_encounters, fct_hospital_events.encounter_started_year]
@@ -998,7 +998,7 @@
     height: 4
   - title: Average Claim Per Procedure
     name: Average Claim Per Procedure
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     type: looker_grid
     fields: [fct_claims.total_claims_value, fct_claims.count, fct_claims.procedure_code]
@@ -1149,7 +1149,7 @@
     height: 2
   - title: Hospitals with Least Successful Risky Procedure Success Rate
     name: Hospitals with Least Successful Risky Procedure Success Rate
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_grid
     fields: [fct_hospital_events.count_of_procedures, fct_hospital_events.count_of_patients_who_died_14_days_after_procedure,
@@ -1242,7 +1242,7 @@
     height: 9
   - title: Avg Claims per Patient
     name: Avg Claims per Patient
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     type: single_value
     fields: [dim_patients.count, fct_claims.billable_period_started_year, fct_claims.count]
@@ -1321,7 +1321,7 @@
     height: 2
   - title: Readmission Rate by Hospital
     name: Readmission Rate by Hospital
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: looker_bar
     fields: [dim_organizations.organization_name, dim_organizations.organization_postal_code,
@@ -1436,7 +1436,7 @@
     height: 11
   - title: Total Readmission Rates
     name: Total Readmission Rates
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.encounter_started_year, dim_patients.count, dt_hospital_readmissions.readmission_rate]
@@ -1478,7 +1478,7 @@
     height: 5
   - title: Readmitted Patients
     name: Readmitted Patients
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.encounter_started_year, dim_patients.count, dt_hospital_readmissions.readmission_rate]
@@ -1539,7 +1539,7 @@
       type: advanced
       display: popover
       options: []
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     listens_to_filters: []
     field: fct_hospital_events.encounter_started_year
@@ -1552,7 +1552,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_name
@@ -1565,7 +1565,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_city
@@ -1585,7 +1585,7 @@
       - '20'
       - '15'
       - '10'
-    model: healthcare_demo
+    model: healthcare_demo_1
     explore: fct_hospital_events
     listens_to_filters: []
     field: dt_hospital_readmissions.admission_timeframe
