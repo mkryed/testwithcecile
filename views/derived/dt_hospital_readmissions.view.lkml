@@ -10,7 +10,7 @@ view: dt_hospital_readmissions {
                                               WHEN LAG(encounter_started_at) OVER (PARTITION BY patient_id ORDER BY encounter_started_at) IS NULL THEN NULL
                                               ELSE TIMESTAMP_DIFF(encounter_started_at, LAG(encounter_started_at) OVER (PARTITION BY patient_id ORDER BY encounter_started_at), DAY)
                                               END AS days_between_visits
-                                       FROM `datatonic-americas-demos.healthcare_demo.stg_encounters`
+                                       FROM `datatonic-americas-demos.dbt_mkyed.stg_encounters`
                                     )
 
       , readmitted_patients AS (
