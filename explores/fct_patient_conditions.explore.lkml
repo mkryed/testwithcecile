@@ -6,6 +6,7 @@ explore: fct_patient_conditions {
   group_label: "3) Demo Datasets"
   label: "Healthcare - Patient Conditions"
   view_label: "Patient Conditions"
+  hidden: yes
 
   join: dim_patients {
     view_label: "Patients"

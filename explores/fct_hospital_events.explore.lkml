@@ -7,6 +7,7 @@ explore: fct_hospital_events {
   group_label: "3) Demo Datasets"
   label: "Healthcare - Hospital Events"
   view_label: "Hospital Events"
+  hidden: yes
 
   join: dim_patients {
     view_label: "Patients"
