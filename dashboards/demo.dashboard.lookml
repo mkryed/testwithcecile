@@ -3,7 +3,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: MjVRrqLVBtBQ02lBqdqJD1
+  preferred_slug: onrS7uTXSguK7Eb9HIUSWY
   elements:
   - title: Most Common Patient Conditions
     name: Most Common Patient Conditions
