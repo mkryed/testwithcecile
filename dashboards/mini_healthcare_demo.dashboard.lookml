@@ -1,18 +1,18 @@
-- dashboard: copy_of_mini_healthcare_demo_dash
-  title: copy of Mini Healthcare Demo Dash
+- dashboard: mini_healthcare_demo_dash
+  title: Mini Healthcare Demo Dash
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: Gmo72U1lDu2c3AVpCTdWij
+  preferred_slug: kMm2n2FNgt2umu12Gq7Xso
   elements:
   - title: Most Common Patient Conditions
     name: Most Common Patient Conditions
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, fct_patient_conditions.count]
     sorts: [fct_patient_conditions.count desc 0]
-    limit: 5
+    limit: 10
     column_limit: 50
     dynamic_fields:
     - measure: average_of_age
@@ -105,7 +105,7 @@
     height: 8
   - title: Age Distribution of Patients
     name: Age Distribution of Patients
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_pie
     fields: [dim_patients.age_range_tier, dim_patients.count]
@@ -177,7 +177,7 @@
       type: advanced
       display: popover
       options: []
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     listens_to_filters: []
     field: fct_hospital_events.encounter_started_year
@@ -190,7 +190,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_name
@@ -203,7 +203,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_city
@@ -223,7 +223,7 @@
       - '20'
       - '15'
       - '10'
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     listens_to_filters: []
     field: dt_hospital_readmissions.admission_timeframe
