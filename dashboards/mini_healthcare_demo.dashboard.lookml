@@ -12,7 +12,7 @@
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, fct_patient_conditions.count]
     sorts: [fct_patient_conditions.count desc 0]
-    limit: 10
+    limit: 5
     column_limit: 50
     dynamic_fields:
     - measure: average_of_age
