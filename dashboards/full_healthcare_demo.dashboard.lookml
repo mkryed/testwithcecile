@@ -1,24 +1,34 @@
-- dashboard: healthcare_demo_1_dashboard
+- dashboard: healthcare_demo_dashboard
   title: Healthcare Demo Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: onrS7uTXSguK7Eb9HIUSWY
+  preferred_slug: MjVRrqLVBtBQ02lBqdqJD1
   elements:
   - title: Most Common Patient Conditions
     name: Most Common Patient Conditions
-    model: healthcare_demo_1_1
+    model: healthcare_demo
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, fct_patient_conditions.count]
     sorts: [fct_patient_conditions.count desc 0]
     limit: 10
     column_limit: 50
-    dynamic_fields: [{measure: average_of_age, based_on: dim_patients.age, expression: '',
-        label: Average of Age, type: average, _kind_hint: measure, _type_hint: number},
-      {measure: list_of_condition_type, based_on: fct_patient_conditions.condition_type,
-        expression: '', label: List of Condition Type, type: list, _kind_hint: measure,
-        _type_hint: list}]
+    dynamic_fields:
+    - measure: average_of_age
+      based_on: dim_patients.age
+      expression: ''
+      label: Average of Age
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: list_of_condition_type
+      based_on: fct_patient_conditions.condition_type
+      expression: ''
+      label: List of Condition Type
+      type: list
+      _kind_hint: measure
+      _type_hint: list
     query_timezone: America/Montreal
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -62,7 +72,6 @@
       show_hide: hide
       first_last: first
       num_rows: 0
-    series_types: {}
     series_colors:
       fct_patient_conditions.count: "#74A09F"
     show_row_numbers: false
@@ -96,38 +105,95 @@
     height: 8
   - title: Conditions with Youngest Onset Age
     name: Conditions with Youngest Onset Age
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, average_of_age_onset]
     sorts: [average_of_age_onset]
     limit: 5000
     column_limit: 50
-    dynamic_fields: [{measure: average_of_age, based_on: dim_patients.age, expression: '',
-        label: Average of Age, type: average, _kind_hint: measure, _type_hint: number},
-      {measure: list_of_condition_type, based_on: fct_patient_conditions.condition_type,
-        expression: '', label: List of Condition Type, type: list, _kind_hint: measure,
-        _type_hint: list}, {measure: average_of_age_when_deceased, based_on: dim_patients.age_when_deceased,
-        expression: '', label: Average of Age When Deceased, type: average, _kind_hint: measure,
-        _type_hint: number}, {measure: average_of_patient_age_at_death, based_on: fct_patient_conditions.patient_age_at_death,
-        expression: '', label: Average of Patient Age At Death, type: average, _kind_hint: measure,
-        _type_hint: number}, {measure: count_of_patient_state, based_on: fct_patient_conditions.patient_state,
-        expression: '', label: Count of Patient State, type: count_distinct, _kind_hint: measure,
-        _type_hint: number}, {category: measure, label: Filtered fct_patient_conditions.count,
-        based_on: fct_patient_conditions.count, _kind_hint: measure, measure: filtered_fct_patient_conditionscount,
-        type: count_distinct, _type_hint: number, filters: {}}, {measure: list_of_patient_state,
-        based_on: fct_patient_conditions.patient_state, expression: '', label: List
-          of Patient State, type: list, _kind_hint: measure, _type_hint: list}, {
-        measure: list_of_patient_city, based_on: fct_patient_conditions.patient_city,
-        expression: '', label: List of Patient City, type: list, _kind_hint: measure,
-        _type_hint: list}, {category: table_calculation, expression: 'floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)',
-        label: Age of Onset, value_format: !!null '', value_format_name: '', _kind_hint: dimension,
-        table_calculation: age_of_onset, _type_hint: number, is_disabled: true}, {
-        category: dimension, expression: 'floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)',
-        label: age_onset, value_format: !!null '', value_format_name: !!null '', dimension: age_onset,
-        _kind_hint: dimension, _type_hint: number}, {measure: average_of_age_onset,
-        based_on: age_onset, expression: '', label: Average of age_onset, type: average,
-        _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - measure: average_of_age
+      based_on: dim_patients.age
+      expression: ''
+      label: Average of Age
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: list_of_condition_type
+      based_on: fct_patient_conditions.condition_type
+      expression: ''
+      label: List of Condition Type
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - measure: average_of_age_when_deceased
+      based_on: dim_patients.age_when_deceased
+      expression: ''
+      label: Average of Age When Deceased
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: average_of_patient_age_at_death
+      based_on: fct_patient_conditions.patient_age_at_death
+      expression: ''
+      label: Average of Patient Age At Death
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: count_of_patient_state
+      based_on: fct_patient_conditions.patient_state
+      expression: ''
+      label: Count of Patient State
+      type: count_distinct
+      _kind_hint: measure
+      _type_hint: number
+    - category: measure
+      label: Filtered fct_patient_conditions.count
+      based_on: fct_patient_conditions.count
+      _kind_hint: measure
+      measure: filtered_fct_patient_conditionscount
+      type: count_distinct
+      _type_hint: number
+      filters: {}
+    - measure: list_of_patient_state
+      based_on: fct_patient_conditions.patient_state
+      expression: ''
+      label: List of Patient State
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - measure: list_of_patient_city
+      based_on: fct_patient_conditions.patient_city
+      expression: ''
+      label: List of Patient City
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - category: table_calculation
+      expression: floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)
+      label: Age of Onset
+      value_format:
+      value_format_name: ''
+      _kind_hint: dimension
+      table_calculation: age_of_onset
+      _type_hint: number
+      is_disabled: true
+    - category: dimension
+      expression: floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)
+      label: age_onset
+      value_format:
+      value_format_name:
+      dimension: age_onset
+      _kind_hint: dimension
+      _type_hint: number
+    - measure: average_of_age_onset
+      based_on: age_onset
+      expression: ''
+      label: Average of age_onset
+      type: average
+      _kind_hint: measure
+      _type_hint: number
     query_timezone: America/Montreal
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -171,7 +237,6 @@
       show_hide: show
       first_last: first
       num_rows: '10'
-    series_types: {}
     series_colors:
       average_of_age_onset: "#AE6262"
     show_row_numbers: true
@@ -198,38 +263,95 @@
     height: 7
   - title: Conditions with Oldest Onset Age
     name: Conditions with Oldest Onset Age
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_patient_conditions
     type: looker_bar
     fields: [fct_patient_conditions.condition_type, average_of_age_onset]
     sorts: [average_of_age_onset desc]
     limit: 5000
     column_limit: 50
-    dynamic_fields: [{measure: average_of_age, based_on: dim_patients.age, expression: '',
-        label: Average of Age, type: average, _kind_hint: measure, _type_hint: number},
-      {measure: list_of_condition_type, based_on: fct_patient_conditions.condition_type,
-        expression: '', label: List of Condition Type, type: list, _kind_hint: measure,
-        _type_hint: list}, {measure: average_of_age_when_deceased, based_on: dim_patients.age_when_deceased,
-        expression: '', label: Average of Age When Deceased, type: average, _kind_hint: measure,
-        _type_hint: number}, {measure: average_of_patient_age_at_death, based_on: fct_patient_conditions.patient_age_at_death,
-        expression: '', label: Average of Patient Age At Death, type: average, _kind_hint: measure,
-        _type_hint: number}, {measure: count_of_patient_state, based_on: fct_patient_conditions.patient_state,
-        expression: '', label: Count of Patient State, type: count_distinct, _kind_hint: measure,
-        _type_hint: number}, {category: measure, label: Filtered fct_patient_conditions.count,
-        based_on: fct_patient_conditions.count, _kind_hint: measure, measure: filtered_fct_patient_conditionscount,
-        type: count_distinct, _type_hint: number, filters: {}}, {measure: list_of_patient_state,
-        based_on: fct_patient_conditions.patient_state, expression: '', label: List
-          of Patient State, type: list, _kind_hint: measure, _type_hint: list}, {
-        measure: list_of_patient_city, based_on: fct_patient_conditions.patient_city,
-        expression: '', label: List of Patient City, type: list, _kind_hint: measure,
-        _type_hint: list}, {category: table_calculation, expression: 'floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)',
-        label: Age of Onset, value_format: !!null '', value_format_name: '', _kind_hint: dimension,
-        table_calculation: age_of_onset, _type_hint: number, is_disabled: true}, {
-        category: dimension, expression: 'floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)',
-        label: age_onset, value_format: !!null '', value_format_name: !!null '', dimension: age_onset,
-        _kind_hint: dimension, _type_hint: number}, {measure: average_of_age_onset,
-        based_on: age_onset, expression: '', label: Average of age_onset, type: average,
-        _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - measure: average_of_age
+      based_on: dim_patients.age
+      expression: ''
+      label: Average of Age
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: list_of_condition_type
+      based_on: fct_patient_conditions.condition_type
+      expression: ''
+      label: List of Condition Type
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - measure: average_of_age_when_deceased
+      based_on: dim_patients.age_when_deceased
+      expression: ''
+      label: Average of Age When Deceased
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: average_of_patient_age_at_death
+      based_on: fct_patient_conditions.patient_age_at_death
+      expression: ''
+      label: Average of Patient Age At Death
+      type: average
+      _kind_hint: measure
+      _type_hint: number
+    - measure: count_of_patient_state
+      based_on: fct_patient_conditions.patient_state
+      expression: ''
+      label: Count of Patient State
+      type: count_distinct
+      _kind_hint: measure
+      _type_hint: number
+    - category: measure
+      label: Filtered fct_patient_conditions.count
+      based_on: fct_patient_conditions.count
+      _kind_hint: measure
+      measure: filtered_fct_patient_conditionscount
+      type: count_distinct
+      _type_hint: number
+      filters: {}
+    - measure: list_of_patient_state
+      based_on: fct_patient_conditions.patient_state
+      expression: ''
+      label: List of Patient State
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - measure: list_of_patient_city
+      based_on: fct_patient_conditions.patient_city
+      expression: ''
+      label: List of Patient City
+      type: list
+      _kind_hint: measure
+      _type_hint: list
+    - category: table_calculation
+      expression: floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)
+      label: Age of Onset
+      value_format:
+      value_format_name: ''
+      _kind_hint: dimension
+      table_calculation: age_of_onset
+      _type_hint: number
+      is_disabled: true
+    - category: dimension
+      expression: floor(diff_months(${fct_patient_conditions.patient_birth_date},${fct_patient_conditions.condition_onset_date})/12)
+      label: age_onset
+      value_format:
+      value_format_name:
+      dimension: age_onset
+      _kind_hint: dimension
+      _type_hint: number
+    - measure: average_of_age_onset
+      based_on: age_onset
+      expression: ''
+      label: Average of age_onset
+      type: average
+      _kind_hint: measure
+      _type_hint: number
     query_timezone: America/Montreal
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -274,7 +396,6 @@
       show_hide: show
       first_last: first
       num_rows: '10'
-    series_types: {}
     series_colors:
       average_of_age_onset: "#AE6262"
     show_row_numbers: true
@@ -301,7 +422,7 @@
     height: 7
   - title: Top Ten Hospitals With Highest Claim Value
     name: Top Ten Hospitals With Highest Claim Value
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     type: looker_column
     fields: [dim_organizations.organization_name, fct_claims.total_claims_value]
@@ -348,9 +469,7 @@
     x_axis_zoom: true
     y_axis_zoom: true
     label_value_format: $0.00,,,"B"
-    series_types: {}
     series_colors: {}
-    series_labels: {}
     column_spacing_ratio: 0.3
     show_row_numbers: true
     transpose: false
@@ -387,7 +506,7 @@
     height: 8
   - title: New Tile
     name: New Tile
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [dim_patients.count, fct_hospital_events.encounter_started_year]
@@ -397,10 +516,16 @@
     sorts: [fct_hospital_events.encounter_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "(offset(${dim_patients.count},0)-offset(${dim_patients.count},1))\
-          \ / offset(${dim_patients.count},1)", label: YoY Change, value_format: !!null '',
-        value_format_name: percent_1, _kind_hint: measure, table_calculation: yoy_change,
-        _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "(offset(${dim_patients.count},0)-offset(${dim_patients.count},1))\
+        \ / offset(${dim_patients.count},1)"
+      label: YoY Change
+      value_format:
+      value_format_name: percent_1
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Montreal
     custom_color_enabled: true
     show_single_value_title: true
@@ -424,7 +549,7 @@
     height: 4
   - title: New Tile
     name: New Tile (2)
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.mortality_rate, fct_hospital_events.encounter_started_year]
@@ -434,9 +559,15 @@
     sorts: [fct_hospital_events.encounter_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: '100* (offset(${fct_hospital_events.mortality_rate},0)-offset(${fct_hospital_events.mortality_rate},1))',
-        label: YoY Chang, value_format: !!null '', value_format_name: decimal_2, _kind_hint: measure,
-        table_calculation: yoy_chang, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: 100* (offset(${fct_hospital_events.mortality_rate},0)-offset(${fct_hospital_events.mortality_rate},1))
+      label: YoY Chang
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: yoy_chang
+      _type_hint: number
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: true
@@ -463,7 +594,7 @@
     height: 4
   - title: Top 10 Least Successful Procedures
     name: Top 10 Least Successful Procedures
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_column
     fields: [fct_hospital_events.procedure_code, fct_hospital_events.count_of_procedures,
@@ -517,7 +648,6 @@
       show_hide: show
       first_last: first
       num_rows: '10'
-    series_types: {}
     series_colors:
       fct_hospital_events.success_rate: "#74A09F"
     show_row_numbers: true
@@ -553,7 +683,7 @@
     height: 9
   - title: Gender Distribution of Patients
     name: Gender Distribution of Patients
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_pie
     fields: [dim_patients.patient_gender, dim_patients.count]
@@ -570,9 +700,6 @@
       options:
         steps: 5
     series_colors: {}
-    series_labels:
-      female: Female
-      male: Male
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
@@ -601,7 +728,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    series_types: {}
     listen:
       Hospital Name: dim_organizations.organization_name
       Location of Hospital: dim_organizations.organization_city
@@ -611,7 +737,7 @@
     height: 8
   - title: Age Distribution of Patients
     name: Age Distribution of Patients
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_pie
     fields: [dim_patients.age_range_tier, dim_patients.count]
@@ -629,11 +755,6 @@
       options:
         steps: 5
     series_colors: {}
-    series_labels:
-      1 to 12: Children (1-12)
-      13 to 17: Adolescents (13-17)
-      18 to 64: Adult (18-64)
-      65 or Above: Older Adult (65+)
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
@@ -662,7 +783,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    series_types: {}
     listen:
       Hospital Name: dim_organizations.organization_name
       Location of Hospital: dim_organizations.organization_city
@@ -672,7 +792,7 @@
     height: 8
   - title: Encounter Rates by Hospital
     name: Encounter Rates by Hospital
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_google_map
     fields: [dim_organizations.organization_name, dim_organizations.organization_postal_code,
@@ -685,7 +805,6 @@
     query_timezone: America/Montreal
     hidden_fields: []
     hidden_points_if_no: []
-    series_labels: {}
     show_view_names: false
     map_plot_mode: points
     heatmap_gridlines: false
@@ -738,7 +857,6 @@
       show_hide: show
       first_last: first
       num_rows: '10'
-    series_types: {}
     defaults_version: 0
     show_row_numbers: true
     transpose: false
@@ -763,7 +881,7 @@
     height: 12
   - title: Avg Claim Cost per Patient
     name: Avg Claim Cost per Patient
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     type: single_value
     fields: [fct_claims.total_claims_value, dim_patients.count, fct_claims.billable_period_started_year]
@@ -773,12 +891,23 @@
     sorts: [fct_claims.billable_period_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "${fct_claims.total_claims_value}\
-          \ / ${dim_patients.count}", label: Avg Claim Cost per Patient, value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, table_calculation: avg_claim_cost_per_patient,
-        _type_hint: number}, {category: table_calculation, expression: 'offset(${avg_claim_cost_per_patient},0)-offset(${avg_claim_cost_per_patient},1)',
-        label: YoY Change, value_format: !!null '', value_format_name: usd_0, _kind_hint: measure,
-        table_calculation: yoy_change, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${fct_claims.total_claims_value} / ${dim_patients.count}"
+      label: Avg Claim Cost per Patient
+      value_format:
+      value_format_name: usd_0
+      _kind_hint: measure
+      table_calculation: avg_claim_cost_per_patient
+      _type_hint: number
+    - category: table_calculation
+      expression: offset(${avg_claim_cost_per_patient},0)-offset(${avg_claim_cost_per_patient},1)
+      label: YoY Change
+      value_format:
+      value_format_name: usd_0
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Vancouver
     custom_color_enabled: true
     show_single_value_title: true
@@ -821,7 +950,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    series_types: {}
     hidden_fields: [fct_claims.total_claims_value, dim_patients.count]
     listen:
       Hospital Name: dim_organizations.organization_name
@@ -832,7 +960,7 @@
     height: 4
   - title: Average Length of Stay (Days)
     name: Average Length of Stay (Days)
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.average_length_of_stay, fct_hospital_events.count_of_encounters,
@@ -844,9 +972,15 @@
     sorts: [fct_hospital_events.average_length_of_stay]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: 'offset(${fct_hospital_events.average_length_of_stay},0)-offset(${fct_hospital_events.average_length_of_stay},1)',
-        label: YoY Change, value_format: !!null '', value_format_name: decimal_2,
-        _kind_hint: measure, table_calculation: yoy_change, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: offset(${fct_hospital_events.average_length_of_stay},0)-offset(${fct_hospital_events.average_length_of_stay},1)
+      label: YoY Change
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Montreal
     custom_color_enabled: true
     show_single_value_title: true
@@ -870,7 +1004,6 @@
     truncate_header: false
     size_to_fit: true
     minimum_column_width: 75
-    series_labels: {}
     series_cell_visualizations:
       fct_hospital_events.average_length_of_stay:
         is_active: true
@@ -908,7 +1041,6 @@
     stacking: ''
     legend_position: center
     label_value_format: '[>=1000000]0.0,,"M";[>=1000]0.0,"K";[>=0]#.#%'
-    series_types: {}
     point_style: circle_outline
     series_colors:
       dt_hospital_readmissions.readmission_rate: "#583783"
@@ -957,7 +1089,7 @@
     height: 4
   - title: New Tile
     name: New Tile (3)
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.count_of_encounters, fct_hospital_events.encounter_started_year]
@@ -967,10 +1099,16 @@
     sorts: [fct_hospital_events.encounter_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "(offset(${fct_hospital_events.count_of_encounters},0)-offset(${fct_hospital_events.count_of_encounters},1))\
-          \ / offset(${fct_hospital_events.count_of_encounters},1)", label: YoY Change,
-        value_format: !!null '', value_format_name: percent_1, _kind_hint: measure,
-        table_calculation: yoy_change, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "(offset(${fct_hospital_events.count_of_encounters},0)-offset(${fct_hospital_events.count_of_encounters},1))\
+        \ / offset(${fct_hospital_events.count_of_encounters},1)"
+      label: YoY Change
+      value_format:
+      value_format_name: percent_1
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Montreal
     custom_color_enabled: true
     show_single_value_title: true
@@ -987,7 +1125,6 @@
         font_color: !!null '', color_application: {collection_id: montreal-analytics,
           palette_id: montreal-analytics-sequential-0}, bold: false, italic: false,
         strikethrough: false, fields: !!null ''}]
-    series_types: {}
     defaults_version: 1
     listen:
       Hospital Name: dim_organizations.organization_name
@@ -998,7 +1135,7 @@
     height: 4
   - title: Average Claim Per Procedure
     name: Average Claim Per Procedure
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     type: looker_grid
     fields: [fct_claims.total_claims_value, fct_claims.count, fct_claims.procedure_code]
@@ -1007,13 +1144,29 @@
     sorts: [fct_claims.total_claims_value desc]
     limit: 10
     column_limit: 50
-    dynamic_fields: [{category: dimension, description: '', label: patient_id, value_format: !!null '',
-        value_format_name: !!null '', calculation_type: group_by, dimension: patient_id,
-        args: [dim_patients.patient_id, [!ruby/hash:ActiveSupport::HashWithIndifferentAccess {
-              label: Patient, filter: ''}], !!null ''], _kind_hint: dimension, _type_hint: string},
-      {category: table_calculation, expression: "${fct_claims.total_claims_value}/${fct_claims.count}",
-        label: Avg Claim Cost per Procedure, value_format: !!null '', value_format_name: usd_0,
-        _kind_hint: measure, table_calculation: avg_claim_cost_per_procedure, _type_hint: number}]
+    dynamic_fields:
+    - category: dimension
+      description: ''
+      label: patient_id
+      value_format:
+      value_format_name:
+      calculation_type: group_by
+      dimension: patient_id
+      args:
+      - dim_patients.patient_id
+      - - label: Patient
+          filter: ''
+      -
+      _kind_hint: dimension
+      _type_hint: string
+    - category: table_calculation
+      expression: "${fct_claims.total_claims_value}/${fct_claims.count}"
+      label: Avg Claim Cost per Procedure
+      value_format:
+      value_format_name: usd_0
+      _kind_hint: measure
+      table_calculation: avg_claim_cost_per_procedure
+      _type_hint: number
     query_timezone: America/Vancouver
     show_view_names: false
     show_row_numbers: false
@@ -1035,7 +1188,6 @@
     show_row_totals: true
     truncate_header: false
     minimum_column_width: 75
-    series_labels: {}
     series_cell_visualizations:
       fct_claims.total_claims_value:
         is_active: true
@@ -1043,13 +1195,10 @@
           palette_id: datatonic-diverging-0
           collection_id: datatonic
         value_display: true
-      avg_claim_cost_per_procedure:
-        is_active: true
     series_value_format:
       fct_claims.total_claims_value: $0.00,,,"B"
     hidden_pivots: {}
     defaults_version: 1
-    series_types: {}
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -1100,7 +1249,6 @@
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Patient Related Metrics"}],"align":"center"},{"type":"h1","children":[{"text":""}],"id":1686853736340}]'
     rich_content_json: '{"format":"slate"}'
     row: 27
@@ -1110,7 +1258,6 @@
   - name: " (2)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Procedure Related Metrics"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 37
@@ -1120,7 +1267,6 @@
   - name: " (3)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Condition Onset"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 48
@@ -1130,7 +1276,6 @@
   - name: " (Copy)"
     type: text
     title_text: " (Copy)"
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Hospital Claims"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 57
@@ -1140,7 +1285,6 @@
   - name: " (4)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Hospitalization Metrics"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 0
@@ -1149,7 +1293,7 @@
     height: 2
   - title: Hospitals with Least Successful Risky Procedure Success Rate
     name: Hospitals with Least Successful Risky Procedure Success Rate
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_grid
     fields: [fct_hospital_events.count_of_procedures, fct_hospital_events.count_of_patients_who_died_14_days_after_procedure,
@@ -1227,7 +1371,6 @@
         type: linear}]
     x_axis_zoom: true
     y_axis_zoom: true
-    series_types: {}
     series_colors:
       fct_hospital_events.success_rate: "#74A09F"
     hidden_pivots: {}
@@ -1242,7 +1385,7 @@
     height: 9
   - title: Avg Claims per Patient
     name: Avg Claims per Patient
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     type: single_value
     fields: [dim_patients.count, fct_claims.billable_period_started_year, fct_claims.count]
@@ -1252,12 +1395,23 @@
     sorts: [fct_claims.billable_period_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "${fct_claims.count}\
-          \ / ${dim_patients.count}", label: Avg Claims per Patient, value_format: !!null '',
-        value_format_name: decimal_1, _kind_hint: measure, table_calculation: avg_claims_per_patient,
-        _type_hint: number}, {category: table_calculation, expression: 'offset(${avg_claims_per_patient},0)-offset(${avg_claims_per_patient},1)',
-        label: YoY Change, value_format: !!null '', value_format_name: decimal_1,
-        _kind_hint: measure, table_calculation: yoy_change, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${fct_claims.count} / ${dim_patients.count}"
+      label: Avg Claims per Patient
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: avg_claims_per_patient
+      _type_hint: number
+    - category: table_calculation
+      expression: offset(${avg_claims_per_patient},0)-offset(${avg_claims_per_patient},1)
+      label: YoY Change
+      value_format:
+      value_format_name: decimal_1
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Vancouver
     custom_color_enabled: true
     show_single_value_title: true
@@ -1300,7 +1454,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    series_types: {}
     hidden_fields: [dim_patients.count, fct_claims.count]
     listen:
       Hospital Name: dim_organizations.organization_name
@@ -1312,7 +1465,6 @@
   - name: " (5)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Re-Admission Rates"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 14
@@ -1321,7 +1473,7 @@
     height: 2
   - title: Readmission Rate by Hospital
     name: Readmission Rate by Hospital
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: looker_bar
     fields: [dim_organizations.organization_name, dim_organizations.organization_postal_code,
@@ -1384,8 +1536,6 @@
       dt_hospital_readmissions.readmission_rate: scatter
     series_colors:
       dt_hospital_readmissions.readmission_rate: "#CE642D"
-    series_labels: {}
-    series_point_styles: {}
     column_group_spacing_ratio: 0.3
     show_sql_query_menu_options: false
     show_totals: true
@@ -1436,7 +1586,7 @@
     height: 11
   - title: Total Readmission Rates
     name: Total Readmission Rates
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.encounter_started_year, dim_patients.count, dt_hospital_readmissions.readmission_rate]
@@ -1447,12 +1597,23 @@
     sorts: [fct_hospital_events.encounter_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "${dim_patients.count}*${dt_hospital_readmissions.readmission_rate}",
-        label: Readmitted Patients, value_format: !!null '', value_format_name: decimal_0,
-        _kind_hint: measure, table_calculation: readmitted_patients, _type_hint: number},
-      {category: table_calculation, expression: '100*(offset(${dt_hospital_readmissions.readmission_rate},0)-offset(${dt_hospital_readmissions.readmission_rate},1))',
-        label: YoY Change, value_format: !!null '', value_format_name: decimal_2,
-        _kind_hint: measure, table_calculation: yoy_change, _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${dim_patients.count}*${dt_hospital_readmissions.readmission_rate}"
+      label: Readmitted Patients
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: readmitted_patients
+      _type_hint: number
+    - category: table_calculation
+      expression: 100*(offset(${dt_hospital_readmissions.readmission_rate},0)-offset(${dt_hospital_readmissions.readmission_rate},1))
+      label: YoY Change
+      value_format:
+      value_format_name: decimal_2
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Montreal
     custom_color_enabled: true
     show_single_value_title: true
@@ -1478,7 +1639,7 @@
     height: 5
   - title: Readmitted Patients
     name: Readmitted Patients
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     type: single_value
     fields: [fct_hospital_events.encounter_started_year, dim_patients.count, dt_hospital_readmissions.readmission_rate]
@@ -1489,13 +1650,24 @@
     sorts: [fct_hospital_events.encounter_started_year desc]
     limit: 500
     column_limit: 50
-    dynamic_fields: [{category: table_calculation, expression: "${dim_patients.count}*${dt_hospital_readmissions.readmission_rate}",
-        label: Readmitted Patients, value_format: !!null '', value_format_name: decimal_0,
-        _kind_hint: measure, table_calculation: readmitted_patients, _type_hint: number},
-      {category: table_calculation, expression: "(offset(${dim_patients.count},0)-offset(${dim_patients.count},1))\
-          \ / offset(${dim_patients.count},1)", label: YoY Change, value_format: !!null '',
-        value_format_name: percent_1, _kind_hint: measure, table_calculation: yoy_change,
-        _type_hint: number}]
+    dynamic_fields:
+    - category: table_calculation
+      expression: "${dim_patients.count}*${dt_hospital_readmissions.readmission_rate}"
+      label: Readmitted Patients
+      value_format:
+      value_format_name: decimal_0
+      _kind_hint: measure
+      table_calculation: readmitted_patients
+      _type_hint: number
+    - category: table_calculation
+      expression: "(offset(${dim_patients.count},0)-offset(${dim_patients.count},1))\
+        \ / offset(${dim_patients.count},1)"
+      label: YoY Change
+      value_format:
+      value_format_name: percent_1
+      _kind_hint: measure
+      table_calculation: yoy_change
+      _type_hint: number
     query_timezone: America/Montreal
     custom_color_enabled: true
     show_single_value_title: true
@@ -1522,7 +1694,6 @@
   - name: " (6)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<b>"
     row: 21
     col: 0
@@ -1539,7 +1710,7 @@
       type: advanced
       display: popover
       options: []
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     listens_to_filters: []
     field: fct_hospital_events.encounter_started_year
@@ -1552,7 +1723,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_name
@@ -1565,7 +1736,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_claims
     listens_to_filters: []
     field: dim_organizations.organization_city
@@ -1585,7 +1756,7 @@
       - '20'
       - '15'
       - '10'
-    model: healthcare_demo_1
+    model: healthcare_demo
     explore: fct_hospital_events
     listens_to_filters: []
     field: dt_hospital_readmissions.admission_timeframe
