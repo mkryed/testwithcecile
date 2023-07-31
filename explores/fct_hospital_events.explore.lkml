@@ -8,6 +8,7 @@ explore: fct_hospital_events {
   label: "Healthcare - Hospital Events"
   view_label: "Hospital Events"
   hidden: yes
+  required_access_grants: [see_demohealthcare_explore]
 
   join: dim_patients {
     view_label: "Patients"

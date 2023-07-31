@@ -7,6 +7,7 @@ explore: fct_patient_conditions {
   label: "Healthcare - Patient Conditions"
   view_label: "Patient Conditions"
   hidden: yes
+  required_access_grants: [see_demohealthcare_explore]
 
   join: dim_patients {
     view_label: "Patients"

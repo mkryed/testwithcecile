@@ -7,6 +7,7 @@ explore: fct_claims {
   label: "Healthcare - Claims"
   view_label: "Claims"
   hidden: yes
+  required_access_grants: [see_demohealthcare_explore]
 
   join: dim_patients {
     view_label: "Patients"
