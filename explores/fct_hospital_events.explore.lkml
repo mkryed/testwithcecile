@@ -4,10 +4,10 @@ include: "/views/refinements/refined_fct_hospital_events.view.lkml"
 include: "/views/derived/dt_hospital_readmissions.view.lkml"
 
 explore: fct_hospital_events {
-  group_label: "3) Demo Datasets"
+  group_label: "3) Demo Datasets - [Only for Testing]"
   label: "Healthcare - Hospital Events"
   view_label: "Hospital Events"
-  hidden: yes
+  hidden: no
   required_access_grants: [see_demohealthcare_explore]
 
   join: dim_patients {

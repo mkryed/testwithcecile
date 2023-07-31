@@ -21,8 +21,3 @@ include: "/dashboards/*.dashboard.lookml"
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
-
-access_grant: see_demohealthcare_explore {
-  user_attribute: see_healthcaredemo
-  allowed_values: ["true"]
-}

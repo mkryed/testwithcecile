@@ -3,10 +3,10 @@ include: "/views/refinements/refined_dim_patients.view.lkml"
 include: "/views/refinements/refined_fct_claims.view.lkml"
 
 explore: fct_claims {
-  group_label: "3) Demo Datasets"
+  group_label: "3) Demo Datasets - [Only for Testing]"
   label: "Healthcare - Claims"
   view_label: "Claims"
-  hidden: yes
+  hidden: no
   required_access_grants: [see_demohealthcare_explore]
 
   join: dim_patients {
