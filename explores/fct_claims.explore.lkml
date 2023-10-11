@@ -23,3 +23,4 @@ explore: fct_claims {
     sql_on: ${fct_claims.organization_id} = ${dim_organizations.organization_id} ;;
   }
 }
+# comment
