@@ -32,7 +32,7 @@ jobs:
       #     git clone https://${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files.git target_repository
 
       - name: mkryed/test_sync_external_files PRIVATE repository
-        uses: mkryed/clone-github-repo-action@v2.2
+        uses: mkryed/clone-github-repo-action@v2.1
         with:
           owner: 'mkryed'
           repository: 'test_sync_external_files'
