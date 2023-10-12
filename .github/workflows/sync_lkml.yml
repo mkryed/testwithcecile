@@ -39,7 +39,7 @@ jobs:
       #     access-token: ${{ secrets.TARGET }}
 
       - name: Copy Filtered Files to Target Repository
-        run: cp -r filtered_files/. target_repository/
+        run: cp -R filtered_files/. target_repository/
 
       - name: Commit and Push to Target Repository
         working-directory: target_repository
