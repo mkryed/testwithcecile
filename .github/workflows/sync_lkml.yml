@@ -25,6 +25,10 @@ jobs:
           mkdir filtered_files
           find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} cp {} filtered_files/
 
+      - name: Copy Filtered Files to Target Repository
+        run: |
+          find filtered_files -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+
       - name: Clone Target Repository
         run: |
           git config --global user.email "actions@github.com"
@@ -38,8 +42,8 @@ jobs:
       #     repository: 'test_sync_external_files'
       #     access-token: ${{ secrets.TARGET }}
 
-      - name: Copy Filtered Files to Target Repository
-        run: cp -R filtered_files/. target_repository/
+      # - name: Copy Filtered Files to Target Repository
+      #   run: cp -R filtered_files/. target_repository/
 
       - name: Commit and Push to Target Repository
         working-directory: target_repository
