@@ -24,3 +24,4 @@ explore: fct_claims {
   }
 }
 # comment
+# this test should be on external!
