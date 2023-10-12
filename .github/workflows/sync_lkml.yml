@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Source Repository
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/mkryed/testwithcecile.git  # Replace with the source repository URL
+          repository: mkryed/testwithcecile  # Replace with the source repository URL
 
       - name: Filter .lkml Files with "external"
         run: |
