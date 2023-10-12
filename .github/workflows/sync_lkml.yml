@@ -20,12 +20,14 @@ jobs:
         with:
           repository: mkryed/testwithcecile  # Replace with the source repository URL
 
+      - name: Create Filtered Files Directory
+        run: mkdir -p filtered_files
+
       - name: Filter .lkml Files with "external"
+        id: filter_lkml
         run: |
-          mkdir filtered_files
           find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} cp {} filtered_files/
           echo "FILTERED_FOLDERS=$(find . -type f -name '*.lkml' -exec dirname {} \; | sort | uniq)" >> $GITHUB_ENV
-
 
       - name: Clone Target Repository
         run: |
