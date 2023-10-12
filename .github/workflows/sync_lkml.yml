@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir filtered_files
           find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} cp {} filtered_files/
-          echo "FILTERED_FOLDERS=$(find . -type f -name '*.lkml' -exec dirname {} \; | sort | uniq)" >> $GITHUB_OUTPUT
+          echo "FILTERED_FOLDERS=$(find . -type f -name '*.lkml' -exec dirname {} \; | sort | uniq)" >> $GITHUB_ENV
 
 
       - name: Clone Target Repository
