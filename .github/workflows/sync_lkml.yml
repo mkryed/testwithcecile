@@ -24,6 +24,7 @@ jobs:
         run: |
           mkdir filtered_files
           find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} cp {} filtered_files/
+          echo "::set-output name=filtered_folders::$(find . -type f -name '*.lkml' -exec dirname {} \; | sort | uniq)"
 
       - name: Clone Target Repository
         run: |
@@ -31,9 +32,16 @@ jobs:
           git config --global user.name "GitHub Actions"
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files target_repository
 
-      - name: Copy Filtered Files to Target Repository
+      # - name: Copy Filtered Files to Target Repository
+      #   run: |
+      #     find filtered_files -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+
+      - name: Create Folder Structure in Target Repository
         run: |
-          find filtered_files -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+          IFS=$'\n' read -rd '' -a folders <<< "${{ steps.filter_lkml.outputs.filtered_folders }}"
+          for folder in "${folders[@]}"; do
+            mkdir -p target_repository/"$folder"
+          done
 
       
 
