@@ -25,15 +25,17 @@ jobs:
           mkdir filtered_files
           find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} cp {} filtered_files/
 
-      - name: Copy Filtered Files to Target Repository
-        run: |
-          find filtered_files -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
-
       - name: Clone Target Repository
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files target_repository
+
+      - name: Copy Filtered Files to Target Repository
+        run: |
+          find filtered_files -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+
+      
 
       # - name: mkryed/test_sync_external_files PRIVATE repository
       #   uses: actions/clone-github-repo-action@v2.1
