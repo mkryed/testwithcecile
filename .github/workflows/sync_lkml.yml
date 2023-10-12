@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
       - name: Checkout Source Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: mkryed/testwithcecile  # Replace with the source repository URL
 
@@ -24,7 +29,14 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git clone https://${{ secrets.TARGET_TOKEN }}@github.com/mkryed/test_sync_external_files.git target_repository
+          git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files target_repository
+
+      # - name: mkryed/test_sync_external_files PRIVATE repository
+      #   uses: actions/clone-github-repo-action@v2.1
+      #   with:
+      #     owner: 'mkryed'
+      #     repository: 'test_sync_external_files'
+      #     access-token: ${{ secrets.TARGET }}
 
       - name: Copy Filtered Files to Target Repository
         run: cp -r filtered_files/. target_repository/
