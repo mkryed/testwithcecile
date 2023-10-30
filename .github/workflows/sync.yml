@@ -20,9 +20,15 @@ jobs:
         with:
           repository: mkryed/testwithcecile
 
+          
+      # - name: Find and Copy .lkml Files
+      #   run: |
+      #     find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target/{}' \;
+
       - name: Find and Copy .lkml Files
         run: |
-          find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target/{}' \;
+          find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+
 
       - name: Clone Target Repository
         run: |
@@ -31,7 +37,7 @@ jobs:
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files repository
 
       - name: Copy Filtered Files to Target Repository
-        run: cp -r target/. repository/
+        run: cp -r target_repository/. repository/
         
       - name: Commit and Push to Target Repository
         working-directory: repository
