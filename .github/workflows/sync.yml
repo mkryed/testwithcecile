@@ -23,11 +23,12 @@ jobs:
           
       # - name: Find and Copy .lkml Files
       #   run: |
-      #     find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target/{}' \;
+      #     find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
 
-      - name: Find and Copy .lkml Files
+
+      - name: Find and Copy .lkml Files with "external"
         run: |
-          find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+          find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
 
 
       - name: Clone Target Repository
