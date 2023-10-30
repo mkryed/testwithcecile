@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'views/raw/fct_claims.view.lkml'
+      - 'views/raw/fct_hospital_events.view.lkml'
+      - 'views/raw/dim_organizations.view.lkml'
 
 jobs:
   sync_files:
@@ -20,8 +22,18 @@ jobs:
           cd $GITHUB_WORKSPACE
           mkdir temp_source
 
-          # Copy specified files and directories from source repository to temp_source
-          cp views/raw/fct_claims.view.lkml temp_source/
+          IFS=$'\n' # Set the Internal Field Separator to new line
+          for file_path in $(git diff --name-only HEAD^ HEAD); do
+            file_dir=$(dirname "$file_path")
+            file_name=$(basename "$file_path")
+            
+            # Create the same directory structure in temp_source
+            mkdir -p "temp_source/$file_dir"
+
+            # Copy the changed file and its directory structure to temp_source
+            cp "$file_path" "temp_source/$file_dir"
+          done            
+
 
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
@@ -29,10 +41,10 @@ jobs:
 
           # Copy changed files to temp_target
           cd temp_source
-          rsync -av --delete --exclude='.git' ./ ../temp_target/
+          rsync -av --delete --exclude='.git' temp_source/ temp_target/
 
           # Commit and push changes to the target repository
-          cd ../temp_target
+          cd temp_target
           git add .
           git commit -m "Sync changes from source repository"
           git push origin main # Replace 'main' with your target branch
