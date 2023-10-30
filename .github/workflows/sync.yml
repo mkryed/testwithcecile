@@ -25,6 +25,9 @@ jobs:
           git config --global user.name "GitHub Actions"
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files target_repository
 
+      - name: Copy Filtered Files to Target Repository
+        run: cp -r filtered_files/. target_repository/
+        
       - name: Commit and Push to Target Repository
         working-directory: target_repository
         run: |
