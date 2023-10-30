@@ -56,3 +56,4 @@ view: dim_organizations {
     drill_fields: [organization_name]
   }
 }
+# test
