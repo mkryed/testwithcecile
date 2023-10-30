@@ -19,7 +19,7 @@ jobs:
         run: |
           find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/{}' \;
 
-      - name: Commit and Push to Target Repository
+      - name: Clone Target Repository
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
