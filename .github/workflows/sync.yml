@@ -39,6 +39,16 @@ jobs:
 
       - name: Copy Filtered Files to Target Repository
         run: cp -r target_repository/. repository/
+
+      - name: Delete Files if "external" is Not Present
+        if: steps.find_files.outcome == 'success'  # Only run if the previous step succeeded
+        run: |
+          cd repository
+          for file in $(comm -23 <(ls) <(cd ../target_repository && ls)); do
+            if ! grep -q "external" "$file"; then
+              rm -f "$file"
+            fi
+          done
         
       - name: Commit and Push to Target Repository
         working-directory: repository
