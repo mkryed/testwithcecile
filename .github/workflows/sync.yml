@@ -61,6 +61,7 @@ jobs:
               rm -f "$file"
             fi
           done
+          find . -type d -empty -delete
         
       - name: Commit and Push to Target Repository
         working-directory: repository
