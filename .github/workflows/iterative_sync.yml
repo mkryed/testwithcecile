@@ -39,16 +39,18 @@ jobs:
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files temp
           cd temp
           
-          for file in 'dashboards/full_healthcare_demo.dashboard.lookml' \
-                      'dashboards/mini_healthcare_demo.dashboard.lookml' \
-                      'explores/fct_claims.explore.lkml' \
-                      'explores/fct_hospital_events.explore.lkml' \
-                      'explores/fct_patient_conditions.explore.lkml' \
-                      'views/derived/dt_hospital_readmissions.view.lkml' \
-                      'views/raw/dim_organizations.view.lkml'
-          do
-            cp $file .
-          done
+          # for file in 'dashboards/full_healthcare_demo.dashboard.lookml' \
+          #             'dashboards/mini_healthcare_demo.dashboard.lookml' \
+          #             'explores/fct_claims.explore.lkml' \
+          #             'explores/fct_hospital_events.explore.lkml' \
+          #             'explores/fct_patient_conditions.explore.lkml' \
+          #             'views/derived/dt_hospital_readmissions.view.lkml' \
+          #             'views/raw/dim_organizations.view.lkml'
+          # do
+          #   cp $file .
+          # done
+
+          cp views/raw/dim_organizations.view.lkml .
 
           # Commit and push changes to the target repository
           new_message="${{ steps.commit_message.outputs.message }}"
