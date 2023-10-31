@@ -20,13 +20,20 @@ jobs:
         with:
           repository: mkryed/testwithcecile
 
-         # COPY Everything .lkml 
-      # - name: Find and Copy .lkml Files
-      #   run: |
-      #     find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
+      - name: Perform Git Status
+        id: git_status
+        run: |
+          # Capture the status and set to 'null' to prevent script failure
+          git_status=$(git status)
+          if [ "$git_status" = "On branch main
+          Your branch is up to date with 'origin/main'.
 
+          nothing to commit, working tree clean" ]; then
+            echo "::set-output name=git_status::null"
+          fi
 
       - name: Find .lkml Files with "external"
+        if: steps.git_status.outputs.git_status != 'null'
         id: find_files
         run: |
           files=$(grep --exclude-dir=".github" -rl "external" .)
