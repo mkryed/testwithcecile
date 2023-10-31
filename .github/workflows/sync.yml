@@ -33,7 +33,6 @@ jobs:
           fi
 
       - name: Find .lkml Files with "external"
-        if: steps.git_status.outputs.git_status != 'null'
         id: find_files
         run: |
           files=$(grep --exclude-dir=".github" -rl "external" .)
@@ -62,6 +61,7 @@ jobs:
         
       - name: Commit and Push to Target Repository
         working-directory: repository
+        if: steps.git_status.outputs.git_status != 'null'
         run: |
           git add .
           git commit -m "Sync .lkml files containing 'external'"
