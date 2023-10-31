@@ -227,3 +227,5 @@
     explore: fct_hospital_events
     listens_to_filters: []
     field: dt_hospital_readmissions.admission_timeframe
+
+#external

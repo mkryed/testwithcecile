@@ -32,3 +32,5 @@ explore: fct_hospital_events {
   }
 
 }
+
+#external

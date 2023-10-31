@@ -16,3 +16,5 @@ explore: fct_patient_conditions {
     sql_on: ${fct_patient_conditions.patient_id} = ${dim_patients.patient_id} ;;
   }
 }
+
+#external
