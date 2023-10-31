@@ -20,28 +20,17 @@ jobs:
         with:
           repository: mkryed/testwithcecile
 
-         # COPY Everything .lkml 
-      # - name: Find and Copy .lkml Files
-      #   run: |
-      #     find . -type f -name '*.lkml' -exec sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/' \;
-
-
       - name: Find .lkml Files with "external"
         id: find_files
         run: |
-          files=$(find . -type f -name '*.lkml' -exec grep -l "external" {} +)
+          files=$(grep --exclude-dir=".github" -rl "external" .)
           if [ -n "$files" ]; then
             mkdir -p target_repository
             echo "$files" | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
           else
             echo "No files with 'external' found."
+            echo "::set-output name=files_not_found::true"
           fi
-
-        # COPY only files that contain external
-      # - name: Find and Copy .lkml Files with "external"
-      #   run: |
-      #     find . -type f -name '*.lkml' -exec grep -l "external" {} + | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
-
 
       - name: Clone Target Repository
         run: |
@@ -53,9 +42,22 @@ jobs:
         run: cp -r target_repository/. repository/
       
         
-      - name: Commit and Push to Target Repository
+      # - name: Commit and Push to Target Repository
+      #   working-directory: repository
+      #   run: |
+      #     git add .
+      #     git commit -m "Sync .lkml files containing 'external'"
+      #     git push origin main  # Replace with the target branch if needed
+
+      - name: Check for Changes
         working-directory: repository
         run: |
-          git add .
-          git commit -m "Sync .lkml files containing 'external'"
-          git push origin main  # Replace with the target branch if needed
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Changes detected. Committing and pushing..."
+            git add .
+            git commit -m "Sync .lkml files containing 'external'"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi
+
