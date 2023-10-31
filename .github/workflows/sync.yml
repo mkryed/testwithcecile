@@ -27,7 +27,7 @@ jobs:
       - name: Find Files with TAG
         id: find_files
         run: |
-          files=$(grep --exclude-dir=".github" -rl "$TAG" .)
+          files=$(grep --exclude-dir=".github" -rl $TAG .)
           if [ -n "$files" ]; then
             mkdir -p target_repository
             echo "$files" | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
