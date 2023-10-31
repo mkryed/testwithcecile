@@ -29,7 +29,7 @@ jobs:
       - name: Find .lkml Files with "external"
         id: find_files
         run: |
-          files=$(find . -type f -name '*.lkml' -exec grep -l "external" {} +)
+          files=$(grep -rl "external" .)
           if [ -n "$files" ]; then
             mkdir -p target_repository
             echo "$files" | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
