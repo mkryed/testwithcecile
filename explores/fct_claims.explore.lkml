@@ -26,4 +26,3 @@ explore: fct_claims {
 # comment
 # external
 # test
-# test
