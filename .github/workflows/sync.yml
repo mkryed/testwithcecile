@@ -1,4 +1,4 @@
-name: Copy .lkml Files to Another Repository
+name: Init Copy Files with "TAG" to Another Repository
 
 on:
   push:
@@ -20,10 +20,14 @@ jobs:
         with:
           repository: mkryed/testwithcecile
 
-      - name: Find .lkml Files with "external"
+      - name: Set TAG
+        run: |
+          TAG="external"  # Set your desired tag here
+
+      - name: Find Files with TAG
         id: find_files
         run: |
-          files=$(grep --exclude-dir=".github" -rl "external" .)
+          files=$(grep --exclude-dir=".github" -rl "$TAG" .)
           if [ -n "$files" ]; then
             mkdir -p target_repository
             echo "$files" | xargs -I{} sh -c 'mkdir -p target_repository/$(dirname "{}") && cp "{}" target_repository/$(dirname "{}")/'
@@ -32,24 +36,16 @@ jobs:
             echo "::set-output name=files_not_found::true"
           fi
 
-      - name: Clone Target Repository
+      - name: Clone Target Repository as repository
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone https://mkryed:${{ secrets.TARGET }}@github.com/mkryed/test_sync_external_files repository
 
-      - name: Copy Filtered Files to Target Repository
+      - name: Copy Files to Target Repository
         run: cp -r target_repository/. repository/
-      
-        
-      # - name: Commit and Push to Target Repository
-      #   working-directory: repository
-      #   run: |
-      #     git add .
-      #     git commit -m "Sync .lkml files containing 'external'"
-      #     git push origin main  # Replace with the target branch if needed
 
-      - name: Check for Changes
+      - name: Check for Changes then Commit and Push to Target Repository
         working-directory: repository
         run: |
           if [[ -n $(git status --porcelain) ]]; then
