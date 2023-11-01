@@ -21,7 +21,6 @@ jobs:
           repository: mkryed/testwithcecile
           
       - name: Check for Changes and get latest commit
-        working-directory: testwithcecile
         run: |
           latest_commit_message=$(git log -1 --pretty=%B)
 
