@@ -19,10 +19,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: mkryed/testwithcecile
-          
-      - name: Check for Changes and get latest commit
-        run: |
-          latest_commit_message=$(git log -1 --pretty=%B)
 
       - name: Find Files with TAG
         id: find_files
@@ -51,7 +47,7 @@ jobs:
           if [[ -n $(git status --porcelain) ]]; then
             echo "Changes detected. Committing and pushing..."
             git add .
-            git commit -m "$latest_commit_message"
+            git commit -m "Sync from Internal instance"
             git push origin main
           else
             echo "No changes to commit."
