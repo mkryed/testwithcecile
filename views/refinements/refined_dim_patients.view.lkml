@@ -174,3 +174,5 @@ view: +dim_patients {
     ]
   }
 }
+
+#external
