@@ -45,3 +45,4 @@ view: refined_stg_procedures {
     drill_fields: []
   }
 }
+#external
